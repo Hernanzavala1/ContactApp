@@ -10,7 +10,7 @@ using WebApplication2.Models.ContactManager;
 namespace ContactApp.Migrations
 {
     [DbContext(typeof(ContactContext))]
-    [Migration("20210202204825_InitialMigration")]
+    [Migration("20210203023352_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,8 +43,9 @@ namespace ContactApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("postalCode")
-                        .HasColumnType("int");
+                    b.Property<string>("postalCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("personID");
 

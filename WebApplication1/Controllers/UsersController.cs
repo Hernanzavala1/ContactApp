@@ -21,6 +21,7 @@ namespace WebApplication1.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
+            
             return View(await _context.Users.ToListAsync());
         }
 

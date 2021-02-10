@@ -17,7 +17,7 @@ namespace WebApplication2.Models.ContactManager
         [Required]
         public String State { get; set; }
         [Required]
-        public int postalCode { get; set; }
+        public String postalCode { get; set; }
         public User User{ get; set; }
     }
 }
