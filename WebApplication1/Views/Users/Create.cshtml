@@ -1,10 +1,10 @@
-﻿@model WebApplication2.Models.ContactManager.User
+﻿@model ContactApp.viewModel.CreateContactView;
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create New Contact";
 }
 
-<h1>Create</h1>
+<h1>Create New Contact</h1>
 
 <h4>User</h4>
 <hr />
@@ -21,6 +21,26 @@
                 <label asp-for="lastName" class="control-label"></label>
                 <input asp-for="lastName" class="form-control" />
                 <span asp-validation-for="lastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="streetName" class="control-label"></label>
+                <input asp-for="streetName" class="form-control" />
+                <span asp-validation-for="streetName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="city" class="control-label"></label>
+                <input asp-for="city" class="form-control" />
+                <span asp-validation-for="city" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="state" class="control-label"></label>
+                <input asp-for="state" class="form-control" />
+                <span asp-validation-for="state" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="zipCode" class="control-label"></label>
+                <input asp-for="zipCode" class="form-control" />
+                <span asp-validation-for="zipCode" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

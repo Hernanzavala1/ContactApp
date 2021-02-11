@@ -169,3 +169,4 @@ C:\Users\herna\source\repos\WebApplication1\WebApplication1\obj\Debug\net5.0\Con
 C:\Users\herna\source\repos\WebApplication1\WebApplication1\obj\Debug\net5.0\ref\ContactApp.dll
 C:\Users\herna\source\repos\WebApplication1\WebApplication1\obj\Debug\net5.0\ContactApp.pdb
 C:\Users\herna\source\repos\WebApplication1\WebApplication1\obj\Debug\net5.0\ContactApp.genruntimeconfig.cache
+C:\Users\herna\source\repos\WebApplication1\WebApplication1\obj\Debug\net5.0\ContactApp.csprojAssemblyReference.cache

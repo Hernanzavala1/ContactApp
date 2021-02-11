@@ -11,10 +11,7 @@ namespace WebApplication2.Models.ContactManager
     {
         [Key]
         public int Id { get; set; }
-
-        [Required]
         public string firstName { get; set; }
-        [Required]
         public string lastName { get; set; }
 
     }

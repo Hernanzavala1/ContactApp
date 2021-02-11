@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebApplication2.Models.ContactManager;
+using ContactApp.viewModel;
 
 namespace WebApplication1.Controllers
 {
@@ -46,7 +46,9 @@ namespace WebApplication1.Controllers
         // GET: Users/Create
         public IActionResult Create()
         {
-            return View();
+            CreateContactView createConctact = new CreateContactView();
+            
+            return View(createConctact);
         }
 
         // POST: Users/Create
@@ -54,15 +56,26 @@ namespace WebApplication1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,firstName,lastName")] User user)
+        public async Task<IActionResult> Create(CreateContactView Contact)
         {
             if (ModelState.IsValid)
             {
+                User user = new User(); //create an instance of a User from data in view
+                user.firstName = Contact.firstName;
+                user.lastName = Contact.lastName;
                 _context.Add(user);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
+                Address address = new Address(); // create instance of Address model from view data
+                address.Street = Contact.streetName;
+                address.city = Contact.city;
+                address.State = Contact.state;
+                address.postalCode = Contact.zipCode;
+                address.User = user.Id; // use the user's id as a foreign key to the address table
+                _context.Addresses.Add(address);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(Contact);
         }
 
         // GET: Users/Edit/5
