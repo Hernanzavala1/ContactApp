@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace ContactApp.viewModel
 {
-    public class CreateContactView
+    public class ContactVM
     {
         //view model for the contact to be created
+        public int id { get; set; }
         [Display(Name = "First Name")]
         [Required]
         public String firstName { get; set; }

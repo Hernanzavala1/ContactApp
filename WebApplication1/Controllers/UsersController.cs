@@ -35,18 +35,27 @@ namespace WebApplication1.Controllers
 
             var user = await _context.Users
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
+            var address = await _context.Addresses
+                .FirstOrDefaultAsync(m => m.User == id);
+            if (user == null || address == null)
             {
                 return NotFound();
             }
-
-            return View(user);
+            ContactVM contact = new ContactVM();
+            contact.firstName = user.firstName;
+            contact.lastName = user.lastName;
+            contact.streetName = address.Street;
+            contact.state = address.State;
+            contact.city = address.city;
+            contact.zipCode = address.postalCode;
+            ViewBag.Id = id;
+            return View(contact);
         }
 
         // GET: Users/Create
         public IActionResult Create()
         {
-            CreateContactView createConctact = new CreateContactView();
+            ContactVM createConctact = new ContactVM();
             
             return View(createConctact);
         }
@@ -56,7 +65,7 @@ namespace WebApplication1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CreateContactView Contact)
+        public async Task<IActionResult> Create(ContactVM Contact)
         {
             if (ModelState.IsValid)
             {
@@ -87,11 +96,23 @@ namespace WebApplication1.Controllers
             }
 
             var user = await _context.Users.FindAsync(id);
-            if (user == null)
+            var address = await _context.Addresses.FirstOrDefaultAsync(m => m.User == id);
+            if (user == null || address == null)
             {
                 return NotFound();
             }
-            return View(user);
+            ContactVM contact = new ContactVM
+            {
+                id = user.Id,
+                firstName = user.firstName,
+                lastName = user.lastName,
+                streetName = address.Street,
+                state = address.State,
+                city = address.city,
+                zipCode = address.postalCode
+            };
+            
+            return View(contact);
         }
 
         // POST: Users/Edit/5
@@ -99,9 +120,9 @@ namespace WebApplication1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,firstName,lastName")] User user)
+        public async Task<IActionResult> Edit(int id, ContactVM contact)
         {
-            if (id != user.Id)
+            if (id != contact.id)
             {
                 return NotFound();
             }
@@ -110,12 +131,21 @@ namespace WebApplication1.Controllers
             {
                 try
                 {
-                    _context.Update(user);
+                    var user = await _context.Users.FindAsync(id);
+                    var address = await _context.Addresses.FirstOrDefaultAsync(m => m.User == id);
+                    user.firstName = contact.firstName;
+                    user.lastName = contact.lastName;
+                    address.Street = contact.streetName;
+                    address.city = contact.city;
+                    address.State = contact.state;
+                    address.postalCode = contact.zipCode;
+                    _context.Users.Update(user);
+                    _context.Addresses.Update(address);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.Id))
+                    if (!UserExists(contact.id))
                     {
                         return NotFound();
                     }
@@ -126,7 +156,7 @@ namespace WebApplication1.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(contact);
         }
 
         // GET: Users/Delete/5
