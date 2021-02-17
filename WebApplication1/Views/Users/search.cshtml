@@ -1,0 +1,39 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model ContactApp.viewModel.ContactVM;
+@{
+    ViewBag.Title = "Search";
+}
+<h1>Search</h1>
+<div>
+    @using (@Html.BeginForm("searchResult", "Users", FormMethod.Post))
+    {
+        <b>Search By Contact's:</b>
+        <div>
+            @Html.RadioButton("searchBy", "Name", true) <text>Name</text>
+            @Html.RadioButton("searchBy", "Address") <text>City</text>
+        </div>
+
+        <br />
+        <div>
+            <label>First Name</label>
+            @Html.TextBox("FirstName")
+
+        </div>
+        <div>
+            <label>Last Name</label>
+            @Html.TextBox("LastName")
+
+        </div>
+        <div>
+            <label>City</label>
+            @Html.TextBox("City")
+
+        </div>
+        <div>
+            <button type ="submit">Search</button>
+        </div>
+
+    }
+</div>

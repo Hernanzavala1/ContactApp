@@ -170,3 +170,6 @@ C:\Users\herna\source\repos\WebApplication1\WebApplication1\obj\Debug\net5.0\ref
 C:\Users\herna\source\repos\WebApplication1\WebApplication1\obj\Debug\net5.0\ContactApp.pdb
 C:\Users\herna\source\repos\WebApplication1\WebApplication1\obj\Debug\net5.0\ContactApp.genruntimeconfig.cache
 C:\Users\herna\source\repos\WebApplication1\WebApplication1\obj\Debug\net5.0\ContactApp.csprojAssemblyReference.cache
+C:\Users\herna\source\repos\WebApplication1\WebApplication1\obj\Debug\net5.0\Razor\Views\Users\search.cshtml.g.cs
+C:\Users\herna\source\repos\WebApplication1\WebApplication1\obj\Debug\net5.0\Razor\Views\Users\searchResult.cshtml.g.cs
+C:\Users\herna\source\repos\WebApplication1\WebApplication1\obj\Debug\net5.0\Razor\Views\Users\notFound.cshtml.g.cs

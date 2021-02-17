@@ -114,7 +114,7 @@ namespace WebApplication1.Controllers
             
             return View(contact);
         }
-
+        
         // POST: Users/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -166,15 +166,24 @@ namespace WebApplication1.Controllers
             {
                 return NotFound();
             }
-
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
+            var user = await _context.Users.FindAsync(id);
+            var address = await _context.Addresses.FirstOrDefaultAsync(m => m.User == id);
+            if (user == null || address == null)
             {
                 return NotFound();
             }
+            ContactVM contact = new ContactVM
+            {
+                id = user.Id,
+                firstName = user.firstName,
+                lastName = user.lastName,
+                streetName = address.Street,
+                state = address.State,
+                city = address.city,
+                zipCode = address.postalCode
+            };
 
-            return View(user);
+            return View(contact);
         }
 
         // POST: Users/Delete/5
@@ -183,14 +192,51 @@ namespace WebApplication1.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var user = await _context.Users.FindAsync(id);
+            var address = await _context.Addresses.FirstOrDefaultAsync(m => m.User == id);
             _context.Users.Remove(user);
+            _context.Addresses.Remove(address);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        public async Task<IActionResult> createSearch()
+        {
+            return View("Views/Users/search.cshtml");
+        }
+        [HttpPost, ActionName("searchResult")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult>  searchResult(string searchBy, string FirstName, string LastName, string city)
+        {
+            List<User> contactNames = new List<User>();
+            if (searchBy == "Name")
+            {
+                contactNames = _context.Users.Where(x => (x.firstName.StartsWith(FirstName) && x.lastName.StartsWith(LastName)) || (FirstName == null && LastName == null)).ToList();
+                if(contactNames.Count == 0)
+                {
+                    return View("Views/Users/notFound.cshtml");
+                }
+                return View("Views/Users/searchResult.cshtml",contactNames);
+            }
+            else
+            {
+                List<Address> contactsAddresses = _context.Addresses.Where(x => x.city == city || city == null).ToList();
+               
+                foreach (Address contactAddress in contactsAddresses)
+                {
+                    contactNames.Add(_context.Users.Find(contactAddress.User));
+                }
+                if (contactNames.Count == 0)
+                {
+                    return View("Views/Users/notFound.cshtml");
+                }
 
+                return View("Views/Users/searchResult.cshtml", contactNames);
+            }
+
+        }
         private bool UserExists(int id)
         {
             return _context.Users.Any(e => e.Id == id);
         }
+      
     }
 }
