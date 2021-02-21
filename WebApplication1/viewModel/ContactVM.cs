@@ -8,7 +8,7 @@ namespace ContactApp.viewModel
 {
     public class ContactVM
     {
-        //view model for the contact to be created
+        //view model for the contact to be created. This is that i can have both, the User and Address model passed into the views.
         public int id { get; set; }
         [Display(Name = "First Name")]
         [Required]

@@ -173,3 +173,4 @@ C:\Users\herna\source\repos\WebApplication1\WebApplication1\obj\Debug\net5.0\Con
 C:\Users\herna\source\repos\WebApplication1\WebApplication1\obj\Debug\net5.0\Razor\Views\Users\search.cshtml.g.cs
 C:\Users\herna\source\repos\WebApplication1\WebApplication1\obj\Debug\net5.0\Razor\Views\Users\searchResult.cshtml.g.cs
 C:\Users\herna\source\repos\WebApplication1\WebApplication1\obj\Debug\net5.0\Razor\Views\Users\notFound.cshtml.g.cs
+C:\Users\herna\source\repos\WebApplication1\WebApplication1\obj\Debug\net5.0\Razor\Views\Shared\ErrorPage.cshtml.g.cs

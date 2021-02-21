@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication2.Models.ContactManager
 {
+    //This is the model for the Address Table in our database
     public class Address
     {
         [Key]
@@ -18,6 +19,7 @@ namespace WebApplication2.Models.ContactManager
         public String State { get; set; }
         [Required]
         public String postalCode { get; set; }
+        //The User attribute is a foreign key to the User table. This is so we can retrieve a certain user tied to this address.
         public int User{ get; set; }
     }
 }
